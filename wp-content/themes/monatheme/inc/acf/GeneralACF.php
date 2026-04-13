@@ -3,6 +3,7 @@
 use Extended\ACF\ConditionalLogic;
 use Extended\ACF\Fields\Group;
 use Extended\ACF\Fields\Image;
+use Extended\ACF\Fields\Link;
 use Extended\ACF\Fields\Repeater;
 use Extended\ACF\Fields\Tab;
 use Extended\ACF\Fields\Text;
@@ -72,3 +73,31 @@ add_action('acf/init', function () {
         ],
     ]);
 }, 10);
+
+add_action('acf/init', function () {
+    register_extended_field_group([
+        'title'    => 'Thiết lập Header',
+        'style'    => 'default',
+        'position' => 'acf_after_title',
+        'location' => [
+            Location::where('options_page', '==', 'theme-settings'),
+        ],
+        'fields' => [
+            Tab::make('Tab Header')
+                ->placement('left'),
+            TrueFalse::make('Hiển thị header', 'show_header')
+                ->stylized()
+                ->defaultValue(true),
+            Text::make('Link ngôn ngữ VI', 'header_lang_vi')
+                ->helperText('URL trang tiếng Việt, mặc định là trang chủ')
+                ->conditionalLogic([
+                    ConditionalLogic::where('show_header', '==', '1'),
+                ]),
+            Text::make('Link ngôn ngữ EN', 'header_lang_en')
+                ->helperText('URL trang tiếng Anh')
+                ->conditionalLogic([
+                    ConditionalLogic::where('show_header', '==', '1'),
+                ]),
+        ],
+    ]);
+}, 11);

@@ -36,6 +36,7 @@ add_action('wp_enqueue_scripts', function () {
    if (is_404()) {
       wp_enqueue_style('mona-404', MONA_THEME_PATH_URI . '/assets/css/404.css');
    }
+   wp_enqueue_style('mona-reset', MONA_THEME_PATH_URI . '/assets/css/reset.css', [], MONA_THEME_VERSION);
    // Tailwind - CDN cho dev, build cho production
    if (WP_DEBUG) {
       // Team dùng CDN khi dev
