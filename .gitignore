@@ -1,0 +1,16 @@
+# Dependencies
+node_modules/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.idea/
+
+# WordPress uploads
+wp-content/uploads/
+wp-content/cache/
+
+# Log files
+*.log
